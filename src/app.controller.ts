@@ -9,7 +9,7 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return "Intelect API (0.0.3)"
+    return "Intelect API (0.0.4)"
   }
 
   @Post('api/user/details')
