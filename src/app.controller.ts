@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CreateInquiryDto } from './app.dto';
 import { Inquiry } from './app.schema';
@@ -7,8 +7,13 @@ import { Inquiry } from './app.schema';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @Get()
+  getHello(): string {
+    return "Intelect API (0.0.1)"
+  }
+
   @Post('api/user/details')
-  getHello(@Body() body: CreateInquiryDto): Promise<Inquiry> {
+  createUserDetails(@Body() body: CreateInquiryDto): Promise<Inquiry> {
     return this.appService.createUserDetails(body);
   }
 }
