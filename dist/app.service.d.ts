@@ -1,10 +1,7 @@
 import { CreateInquiryDto } from './app.dto';
-import { Inquiry, InquiryDocument } from './app.schema';
-import { Model } from 'mongoose';
+import { Inquiry } from './app.schema';
 export declare class AppService {
-    private inquiryModel;
-    constructor(inquiryModel: Model<InquiryDocument>);
     getHello(): string;
+    sendEmail(): Promise<void>;
     createUserDetails(createInquiryDto: CreateInquiryDto): Promise<Inquiry>;
-    findAll(): Promise<Inquiry[]>;
 }
