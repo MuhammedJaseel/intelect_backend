@@ -46,7 +46,7 @@ export class AppService {
   }
 
   async createUserDetails(body: CreateInquiryDto) {
-    this._sendEmail(body);
+    await this._sendEmail(body);
     return new Inquiry();
   }
 

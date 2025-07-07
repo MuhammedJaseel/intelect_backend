@@ -42,7 +42,7 @@ let AppService = class AppService {
         console.log(res);
     }
     async createUserDetails(body) {
-        this._sendEmail(body);
+        await this._sendEmail(body);
         return new app_schema_1.Inquiry();
     }
 };
