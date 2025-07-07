@@ -12,12 +12,11 @@ export class AppService {
   //   private inquiryModel: Model<InquiryDocument>,
   // ) {}
 
-  getHello(): any {
-    return  this.sendEmail();
+  getHello(): string {
     return 'Hello World! v1';
   }
 
-  async sendEmail() {
+  async _sendEmail(text: string) {
     const transporter = nodemailer.createTransport({
       host: 'smtp.zoho.com',
       port: 465,
@@ -31,13 +30,20 @@ export class AppService {
     let res = await transporter.sendMail({
       from: 'info@intellectacademicsolutions.com',
       to: 'cuownbe.it@gmail.com',
-      subject: 'hallow',
-      text: 'Hallow ',
+      subject: 'Enquiry',
+      text,
     });
     console.log(res);
   }
 
-  async createUserDetails(createInquiryDto: CreateInquiryDto) {
+  async createUserDetails(body: CreateInquiryDto) {
+    this._sendEmail(`
+      Name: ${body.name},
+      Email: ${body.email},
+      Phone: ${body.phone},
+      Course: ${body.course},
+      Message: ${body.message},
+      Reference: ${body.reference}`);
     return new Inquiry();
   }
 

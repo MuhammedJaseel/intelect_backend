@@ -12,10 +12,9 @@ const app_schema_1 = require("./app.schema");
 const nodemailer = require("nodemailer");
 let AppService = class AppService {
     getHello() {
-        return this.sendEmail();
         return 'Hello World! v1';
     }
-    async sendEmail() {
+    async _sendEmail(text) {
         const transporter = nodemailer.createTransport({
             host: 'smtp.zoho.com',
             port: 465,
@@ -28,12 +27,19 @@ let AppService = class AppService {
         let res = await transporter.sendMail({
             from: 'info@intellectacademicsolutions.com',
             to: 'cuownbe.it@gmail.com',
-            subject: 'hallow',
-            text: 'Hallow ',
+            subject: 'Enquiry',
+            text,
         });
         console.log(res);
     }
-    async createUserDetails(createInquiryDto) {
+    async createUserDetails(body) {
+        this._sendEmail(`
+      Name: ${body.name},
+      Email: ${body.email},
+      Phone: ${body.phone},
+      Course: ${body.course},
+      Message: ${body.message},
+      Reference: ${body.reference}`);
         return new app_schema_1.Inquiry();
     }
 };
