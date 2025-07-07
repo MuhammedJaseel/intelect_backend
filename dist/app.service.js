@@ -14,32 +14,35 @@ let AppService = class AppService {
     getHello() {
         return 'Hello World! v1';
     }
-    async _sendEmail(text) {
+    async _sendEmail(body) {
         const transporter = nodemailer.createTransport({
             host: 'smtp.zoho.com',
             port: 465,
             secure: true,
             auth: {
                 user: 'info@intellectacademicsolutions.com',
-                pass: process.env.ZOHO_PASSWORD,
+                pass: process.env.ZOHO_PASSWORD || '',
             },
         });
         let res = await transporter.sendMail({
             from: 'info@intellectacademicsolutions.com',
             to: 'cuownbe.it@gmail.com',
             subject: 'Enquiry',
-            text,
+            text: '',
+            html: `
+      <h1>Enquiry Details</h1>
+      <p><strong>Name:</strong> ${body?.name ?? ''}</p>
+      <p><strong>Email:</strong> ${body?.email ?? ''}</p>
+      <p><strong>Phone:</strong> ${body?.phone ?? ''}</p>
+      <p><strong>Course:</strong> ${body?.course ?? ''}</p>
+      <p><strong>Message:</strong> ${body?.message ?? ''}</p>
+      <p><strong>Reference:</strong> ${body?.reference ?? ''}</p>
+    `,
         });
         console.log(res);
     }
     async createUserDetails(body) {
-        this._sendEmail(`
-      Name: ${body.name},
-      Email: ${body.email},
-      Phone: ${body.phone},
-      Course: ${body.course},
-      Message: ${body.message},
-      Reference: ${body.reference}`);
+        this._sendEmail(body);
         return new app_schema_1.Inquiry();
     }
 };
