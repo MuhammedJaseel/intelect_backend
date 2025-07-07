@@ -26,7 +26,7 @@ let AppService = class AppService {
         });
         let res = await transporter.sendMail({
             from: 'info@intellectacademicsolutions.com',
-            to: 'cuownbe.it@gmail.com',
+            to: 'info@intellectacademicsolutions.com',
             subject: 'Enquiry',
             text: '',
             html: `
