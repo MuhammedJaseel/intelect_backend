@@ -12,8 +12,8 @@ export class AppService {
   //   private inquiryModel: Model<InquiryDocument>,
   // ) {}
 
-  getHello(): string {
-    this.sendEmail();
+  getHello(): any {
+    return  this.sendEmail();
     return 'Hello World! v1';
   }
 

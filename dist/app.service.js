@@ -12,7 +12,7 @@ const app_schema_1 = require("./app.schema");
 const nodemailer = require("nodemailer");
 let AppService = class AppService {
     getHello() {
-        this.sendEmail();
+        return this.sendEmail();
         return 'Hello World! v1';
     }
     async sendEmail() {
